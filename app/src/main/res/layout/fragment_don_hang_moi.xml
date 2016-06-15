@@ -86,7 +86,7 @@
                         android:layout_height="wrap_content"
                         android:text="Nhận"
                         android:id="@+id/textView53213"
-                        android:textColor="@color/colorBlack"
+                        android:textColor="@color/background_floating_material_light"
                         android:layout_gravity="center_vertical" />
                 </LinearLayout>
             </LinearLayout>
