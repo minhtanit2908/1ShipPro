@@ -9,16 +9,26 @@ public class Item {
     private String time;
     private String congviec;
     private String diadiem;
+    private boolean check;
 
     public Item() {
     }
 
-    public Item(String title, String day, String time, String congviec, String diadiem) {
+    public Item(String title, String day, String time, String congviec, String diadiem, boolean check) {
         this.title = "ĐƠN HÀNG "+title;
         this.day = day;
         this.time = time;
         this.congviec = congviec;
         this.diadiem = diadiem;
+        this.check = check;
+    }
+
+    public boolean isCheck() {
+        return check;
+    }
+
+    public void setCheck(boolean check) {
+        this.check = check;
     }
 
     public String getTitle() {

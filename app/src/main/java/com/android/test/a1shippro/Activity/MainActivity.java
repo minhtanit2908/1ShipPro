@@ -1,6 +1,7 @@
 package com.android.test.a1shippro.Activity;
 
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -28,20 +29,41 @@ public class MainActivity extends AppCompatActivity
     private ViewPager mViewPager;
     private TabLayout tabLayout;
     ViewPagerAdapter adapter;
+    public Toolbar toolbar;
+    public AppBarLayout appbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        init();
+    }
+
+    public Toolbar getToolbar(){
+        return toolbar;
+    }
+
+    void init(){
+        initToolbar();
+        initViewPager();
+        initDrawerMenu();
+    }
+
+    void initToolbar(){
+        appbar = (AppBarLayout) findViewById(R.id.appbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("ĐƠN HÀNG CỦA TÔI");
         setSupportActionBar(toolbar);
+    }
 
+    void initViewPager(){
         adapter = new ViewPagerAdapter(getSupportFragmentManager(),MainActivity.this,getListFragment());
         mViewPager = (ViewPager) findViewById(R.id.container);
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         mViewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(mViewPager);
+    }
 
+    void initDrawerMenu(){
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);

@@ -5,9 +5,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.test.a1shippro.AbstractClass.BaseFragment;
 import com.android.test.a1shippro.Model.Item;
 import com.android.test.a1shippro.R;
 
@@ -21,16 +25,20 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     Context context;
     List<Item> mList;
     Item homeItem;
+    BaseFragment fragment;
+    boolean mAllEnabled = false;
 
-    public RecyclerViewAdapter(Context context, List<Item> mList) {
+    public RecyclerViewAdapter(Context context, List<Item> mList, BaseFragment fragment) {
         this.context = context;
         this.mList = mList;
+        this.fragment = fragment;
     }
 
     public class DataObjectHolder extends RecyclerView.ViewHolder {
         TextView tvTitle, tvDay, tvTime, tvCongViec, tvDiaDiem;
         int iTag;
         LinearLayout main;
+        CheckBox checkBox;
         public DataObjectHolder(View itemView) {
             super(itemView);
             main = (LinearLayout) itemView.findViewById(R.id.mainList);
@@ -39,6 +47,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             tvTime = (TextView) itemView.findViewById(R.id.tvTime);
             tvCongViec = (TextView) itemView.findViewById(R.id.tvCongViec);
             tvDiaDiem = (TextView) itemView.findViewById(R.id.tvDiaDiem);
+            checkBox = (CheckBox) itemView.findViewById(R.id.checkBox);
         }
     }
 
@@ -50,15 +59,37 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     @Override
-    public void onBindViewHolder(RecyclerViewAdapter.DataObjectHolder holder, int position) {
+    public void onBindViewHolder(final RecyclerViewAdapter.DataObjectHolder holder, final int position) {
         homeItem = mList.get(position);
         holder.tvTitle.setText(homeItem.getTitle());
         holder.tvDay.setText(homeItem.getDay());
         holder.tvTime.setText(homeItem.getTime());
         holder.tvCongViec.setText(homeItem.getCongviec());
         holder.tvDiaDiem.setText(homeItem.getDiadiem());
-
         holder.iTag = position;
+        if(homeItem.isCheck())
+            holder.checkBox.setChecked(true);
+        else
+            holder.checkBox.setChecked(false);
+        holder.main.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                fragment.longClickItem();
+                return false;
+            }
+        });
+        holder.main.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context,mList.get(position).getTitle(),Toast.LENGTH_LONG).show();
+            }
+        });
+        holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                mList.get(holder.iTag).setCheck(isChecked);
+            }
+        });
     }
 
     @Override
@@ -66,5 +97,20 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return mList.size();
     }
 
+    @Override
+    public void onViewAttachedToWindow(DataObjectHolder holder) {
+        super.onViewAttachedToWindow(holder);
+        holder.itemView.setEnabled(isAllItemsEnabled());
+    }
 
+    public boolean isAllItemsEnabled(){ return mAllEnabled; }
+
+
+    public boolean getItemEnabled(int position){
+        return true;
+    }
+    public void setAllItemsEnabled(boolean enable){
+        mAllEnabled = enable;
+        notifyItemRangeChanged(0, getItemCount());
+    }
 }
