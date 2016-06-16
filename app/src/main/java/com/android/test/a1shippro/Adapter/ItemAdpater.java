@@ -69,7 +69,6 @@ public class ItemAdpater extends BaseAdapter {
                 convertView = inflater.inflate(R.layout.item_listview, null);
 
                 holder.main = (LinearLayout) convertView.findViewById(R.id.mainList);
-                holder.sub = (LinearLayout) convertView.findViewById(R.id.subList);
                 holder.tvTitle = (TextView) convertView.findViewById(R.id.tvTitle);
                 holder.tvDay = (TextView) convertView.findViewById(R.id.tvDay);
                 holder.tvTime = (TextView) convertView.findViewById(R.id.tvTime);
@@ -81,26 +80,13 @@ public class ItemAdpater extends BaseAdapter {
             } else {
                 holder = (Holder) convertView.getTag();
             }
-            if (position == lstHome.size()-1) {
-                holder.main.setVisibility(View.GONE);
-                holder.sub.setVisibility(View.VISIBLE);
-                holder.tvTitle.setText(homeItem.getTitle());
-                holder.tvDay.setText(homeItem.getDay());
-                holder.tvTime.setText(homeItem.getTime());
-                holder.tvCongViec.setText(homeItem.getCongviec());
-                holder.tvDiaDiem.setText(homeItem.getDiadiem());
-                holder.iTag = position;
-            } else {
-                holder.main.setVisibility(View.VISIBLE);
-                holder.sub.setVisibility(View.GONE);
-                holder.tvTitle.setText(homeItem.getTitle());
-                holder.tvDay.setText(homeItem.getDay());
-                holder.tvTime.setText(homeItem.getTime());
-                holder.tvCongViec.setText(homeItem.getCongviec());
-                holder.tvDiaDiem.setText(homeItem.getDiadiem());
+            holder.tvTitle.setText(homeItem.getTitle());
+            holder.tvDay.setText(homeItem.getDay());
+            holder.tvTime.setText(homeItem.getTime());
+            holder.tvCongViec.setText(homeItem.getCongviec());
+            holder.tvDiaDiem.setText(homeItem.getDiadiem());
 
-                holder.iTag = position;
-            }
+            holder.iTag = position;
         } catch (Exception e) {
         }
 
@@ -110,7 +96,7 @@ public class ItemAdpater extends BaseAdapter {
     class Holder {
         TextView tvTitle, tvDay, tvTime, tvCongViec, tvDiaDiem;
         int iTag;
-        LinearLayout main, sub;
+        LinearLayout main;
 
         public Holder() {
 

@@ -7,4 +7,5 @@
     <color name="colorBG">#ededed</color>
     <color name="colorBlack">#000000</color>
     <color name="colorRed">#ef2a33</color>
+    <color name="colorWhite">#ffffff</color>
 </resources>
