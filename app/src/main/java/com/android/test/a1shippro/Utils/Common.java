@@ -6,6 +6,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.graphics.RectF;
+import android.media.ExifInterface;
+import android.os.Build;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.MotionEvent;
@@ -359,5 +361,37 @@ public class Common {
         m.postRotate(alpha);
         return Bitmap.createBitmap(b, 0, 0, b.getWidth(), b.getHeight(), m, true);
     }
+    public static boolean checkVersionAndroid() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+            return true;
+        } else
+            return false;
+    }
+    //Rotate image when get image uri form taking and gallery.
+    public static Bitmap rotateImagePath(String photoPath, Bitmap bb) {
+        int orientation = 1;
+        int alpha = 0;
+        ExifInterface ei = null;
+        try {
+            ei = new ExifInterface(photoPath);
+            orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED);
+        } catch (Exception e) {
+        }
+        switch (orientation) {
+            case ExifInterface.ORIENTATION_ROTATE_90:
+                alpha = 90;
+                break;
+            case ExifInterface.ORIENTATION_ROTATE_180:
+                alpha = 180;
+                break;
+            case ExifInterface.ORIENTATION_ROTATE_270:
+                alpha = 270;
+                break;
+            default:
+                break;
+        }
+        return Common.resize(bb, alpha);
+    }
+
     //
 }//END

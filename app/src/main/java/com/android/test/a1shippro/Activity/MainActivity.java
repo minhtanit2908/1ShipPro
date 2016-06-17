@@ -16,9 +16,9 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.android.test.a1shippro.Adapter.ViewPagerAdapter;
-import com.android.test.a1shippro.Fragment.DaHoanThanhFragment;
-import com.android.test.a1shippro.Fragment.DaNhanFragment;
-import com.android.test.a1shippro.Fragment.DonHangMoiFragment;
+import com.android.test.a1shippro.Fragment.DeliveredFragment;
+import com.android.test.a1shippro.Fragment.ReceivedOrdersFragment;
+import com.android.test.a1shippro.Fragment.NewOrdersFragment;
 import com.android.test.a1shippro.R;
 
 import java.util.ArrayList;
@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity
     ViewPagerAdapter adapter;
     public Toolbar toolbar;
     public AppBarLayout appbar;
+    String[] titles;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +44,11 @@ public class MainActivity extends AppCompatActivity
     }
 
     void init(){
+        titles = new String[]{
+                getResources().getString(R.string.donhang_tab1),
+                getResources().getString(R.string.donhang_tab2),
+                getResources().getString(R.string.donhang_tab3)
+        };
         initToolbar();
         initViewPager();
         initDrawerMenu();
@@ -51,12 +57,12 @@ public class MainActivity extends AppCompatActivity
     void initToolbar(){
         appbar = (AppBarLayout) findViewById(R.id.appbar);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("ĐƠN HÀNG CỦA TÔI");
+        toolbar.setTitle(getResources().getString(R.string.title_donhang));
         setSupportActionBar(toolbar);
     }
 
     void initViewPager(){
-        adapter = new ViewPagerAdapter(getSupportFragmentManager(),MainActivity.this,getListFragment());
+        adapter = new ViewPagerAdapter(getSupportFragmentManager(),MainActivity.this,getListFragment(),titles);
         mViewPager = (ViewPager) findViewById(R.id.container);
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         mViewPager.setAdapter(adapter);
@@ -76,9 +82,9 @@ public class MainActivity extends AppCompatActivity
 
     private List<Fragment> getListFragment() {
         final List<Fragment> list = new ArrayList<>();
-        DonHangMoiFragment dhm = new DonHangMoiFragment();
-        DaNhanFragment dn = new DaNhanFragment();
-        DaHoanThanhFragment dht = new DaHoanThanhFragment();
+        NewOrdersFragment dhm = new NewOrdersFragment();
+        ReceivedOrdersFragment dn = new ReceivedOrdersFragment();
+        DeliveredFragment dht = new DeliveredFragment();
         //Collections.addAll(list,home,competition,user);
         list.add(dhm);
         list.add(dn);

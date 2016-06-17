@@ -10,15 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import com.android.test.a1shippro.AbstractClass.BaseFragment;
 import com.android.test.a1shippro.AbstractClass.HidingScrollListener;
 import com.android.test.a1shippro.Adapter.RecyclerViewAdapter;
-import com.android.test.a1shippro.Adapter.SpinnerAdapter;
 import com.android.test.a1shippro.Model.Item;
 import com.android.test.a1shippro.R;
 
@@ -28,24 +24,21 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DonHangMoiFragment extends BaseFragment {
+public class NewOrdersFragment extends BaseFragment {
     Spinner s1, s2;
     String[] ss1 = {"Đơn hàng mới nhất", "...", "...", "..."};
     String[] ss2 = {"Tất cả công việc", "...", "...", "..."};
     List<Item> mListItem;
 
-    CheckBox cbAll;
     RecyclerView recyclerView;
     SwipeRefreshLayout swipeRefreshLayout;
-    LinearLayout btnReceive, btnDismiss, btnDismiss1, btnUndo, lnDefault, lnConfirm;
 
     RecyclerViewAdapter adpater;
-    SpinnerAdapter spinner1, spinner2;
 
     LinearLayoutManager linearLayoutManager;
     boolean loading = false;
 
-    public DonHangMoiFragment() {
+    public NewOrdersFragment() {
         // Required empty public constructor
     }
 
@@ -66,108 +59,20 @@ public class DonHangMoiFragment extends BaseFragment {
         s1 = (Spinner) view.findViewById(R.id.spinner);
         s2 = (Spinner) view.findViewById(R.id.spinner1);
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefresh);
-        cbAll = (CheckBox) view.findViewById(R.id.cbAll1);
-
-        initButton(view);
         setupSpinner();
         setupRecyclerView();
         setupSwipeRefresh();
-        cbAll.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                checkAll(isChecked);
-            }
-        });
     }
 
-    void initButton(View view) {
-        btnReceive = (LinearLayout) view.findViewById(R.id.btnReceive);
-        btnDismiss = (LinearLayout) view.findViewById(R.id.btnDismiss);
-        lnDefault = (LinearLayout) view.findViewById(R.id.lnDefault);
-        lnConfirm = (LinearLayout) view.findViewById(R.id.lnConfirm);
-        btnUndo = (LinearLayout) view.findViewById(R.id.btnUndo);
-        btnDismiss1 = (LinearLayout) view.findViewById(R.id.btnDismiss1);
 
-        //First show default linear default
-        lnDefault.setVisibility(View.VISIBLE);
-        lnConfirm.setVisibility(View.GONE);
-        //set on click for button
-
-        btnDismiss.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (checkCB()){
-                    //show linear confirm after delete
-                    lnDefault.setVisibility(View.GONE);
-                    lnConfirm.setVisibility(View.VISIBLE);
-                    adpater.setAllItemsEnabled(false);
-                    recyclerView.setEnabled(false);
-                    recyclerView.setClickable(false);
-                }
-            }
-        });
-        btnDismiss1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //before confirm delete
-                removeItemList();
-                lnDefault.setVisibility(View.VISIBLE);
-                lnConfirm.setVisibility(View.GONE);
-                cbAll.setChecked(false);
-                adpater.setAllItemsEnabled(true);
-            }
-        });
-        btnReceive.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                receiveDonHang();
-            }
-        });
-        btnUndo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                lnDefault.setVisibility(View.VISIBLE);
-                lnConfirm.setVisibility(View.GONE);
-                adpater.setAllItemsEnabled(true);
-            }
-        });
-    }
-
-    boolean checkCB() {
-        for (int i = 0; i< mListItem.size();i++)
-            if (mListItem.get(i).isCheck())
-                return true;
-        return false;
-    }
-
-    private void receiveDonHang() {
-    }
-
-    void removeItemList() {
-        List<Item> mListRespone = new ArrayList<>();
-        for (int i = 0; i < mListItem.size(); i++)
-            if (!mListItem.get(i).isCheck()) {
-                mListRespone.add(mListItem.get(i));
-            }
-        mListItem.clear();
-        mListItem.addAll(mListRespone);
-        adpater.notifyDataSetChanged();
-    }
-
-    public void checkAll(boolean check) {
-        if (check) {
-            for (int i = 0; i < mListItem.size(); i++)
-                mListItem.get(i).setCheck(true);
-            adpater.notifyDataSetChanged();
-        } else {
-            for (int i = 0; i < mListItem.size(); i++)
-                mListItem.get(i).setCheck(false);
-            adpater.notifyDataSetChanged();
-        }
-    }
 
     @Override
     public void longClickItem() {
+    }
+
+    @Override
+    public void showControls(boolean check) {
+
     }
 
     public void setupRecyclerView() {
@@ -188,7 +93,7 @@ public class DonHangMoiFragment extends BaseFragment {
             );
             mListItem.add(item);
         }
-        adpater = new RecyclerViewAdapter(getContext(), mListItem, this);
+        adpater = new RecyclerViewAdapter(getContext(), mListItem, this,false);
         recyclerView.setAdapter(adpater);
         recyclerView.addOnScrollListener(new HidingScrollListener() {
             @Override

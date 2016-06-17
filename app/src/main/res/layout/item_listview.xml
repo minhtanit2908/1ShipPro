@@ -11,18 +11,11 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:background="@color/colorWhite">
-                <CheckBox
-                    android:id="@+id/checkBox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="5dp"
-                    android:checked="false" />
+                android:background="@color/colorBG">
 
                 <ImageView
                     android:id="@+id/imageView6"
@@ -31,16 +24,28 @@
                     android:layout_centerVertical="true"
                     android:background="@color/colorAccent" />
 
+                <CheckBox
+                    android:id="@+id/checkBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:checked="false"
+                    android:layout_toRightOf="@+id/imageView6"
+                    android:layout_gravity="center_vertical" />
+
                 <TextView
                     android:id="@+id/tvTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/checkBox"
                     android:text="New Text"
                     android:textColor="@color/abc_primary_text_disable_only_material_light"
                     android:textSize="@dimen/textsize_title"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_toRightOf="@+id/checkBox"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="5dp" />
 
                 <TextView
                     android:id="@+id/tvDay"
@@ -50,7 +55,8 @@
                     android:layout_marginRight="5dp"
                     android:layout_toLeftOf="@+id/imageView2"
                     android:text="New Text"
-                    android:textSize="@dimen/textsize_body" />
+                    android:textSize="@dimen/textsize_body"
+                    android:layout_gravity="center_vertical" />
 
                 <ImageView
                     android:id="@+id/imageView2"
@@ -60,7 +66,8 @@
                     android:layout_centerVertical="true"
                     android:layout_toLeftOf="@+id/tvTime"
                     android:layout_toStartOf="@+id/tvTime"
-                    android:src="@drawable/ic_alarm_on_black_24dp" />
+                    android:src="@drawable/ic_alarm_on_black_24dp"
+                    android:layout_gravity="center_vertical" />
 
                 <TextView
                     android:id="@+id/tvTime"
@@ -69,18 +76,11 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:text="New Text"
-                    android:textSize="@dimen/textsize_body" />
+                    android:textSize="@dimen/textsize_body"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="5dp" />
 
-            </RelativeLayout>
-
-            <View
-            android:layout_width="wrap_content"
-            android:layout_height="0.3dp"
-            android:background="@color/dim_foreground_material_dark"/>
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="0.3dp"
-                android:background="@color/colorWhite"/>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

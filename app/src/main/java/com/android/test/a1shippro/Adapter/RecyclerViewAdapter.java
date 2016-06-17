@@ -1,6 +1,7 @@
 package com.android.test.a1shippro.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.test.a1shippro.AbstractClass.BaseFragment;
+import com.android.test.a1shippro.Activity.OrdersDetailActivity;
 import com.android.test.a1shippro.Model.Item;
 import com.android.test.a1shippro.R;
 
@@ -27,11 +29,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     Item homeItem;
     BaseFragment fragment;
     boolean mAllEnabled = false;
+    boolean showCheckBox;
 
-    public RecyclerViewAdapter(Context context, List<Item> mList, BaseFragment fragment) {
+    public RecyclerViewAdapter(Context context, List<Item> mList, BaseFragment fragment, boolean showCheckBox) {
         this.context = context;
         this.mList = mList;
         this.fragment = fragment;
+        this.showCheckBox = showCheckBox;
     }
 
     public class DataObjectHolder extends RecyclerView.ViewHolder {
@@ -67,10 +71,23 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.tvCongViec.setText(homeItem.getCongviec());
         holder.tvDiaDiem.setText(homeItem.getDiadiem());
         holder.iTag = position;
-        if(homeItem.isCheck())
-            holder.checkBox.setChecked(true);
-        else
-            holder.checkBox.setChecked(false);
+        if(showCheckBox) {
+            holder.checkBox.setVisibility(View.VISIBLE);
+            if (homeItem.isCheck())
+                holder.checkBox.setChecked(true);
+            else
+                holder.checkBox.setChecked(false);
+            holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    mList.get(holder.iTag).setCheck(isChecked);
+                    showUpdateButton();
+                }
+            });
+        }
+        else {
+            holder.checkBox.setVisibility(View.GONE);
+        }
         holder.main.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -82,12 +99,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             @Override
             public void onClick(View v) {
                 Toast.makeText(context,mList.get(position).getTitle(),Toast.LENGTH_LONG).show();
-            }
-        });
-        holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                mList.get(holder.iTag).setCheck(isChecked);
+                Intent i = new Intent(context, OrdersDetailActivity.class);
+                context.startActivity(i);
             }
         });
     }
@@ -101,6 +114,18 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onViewAttachedToWindow(DataObjectHolder holder) {
         super.onViewAttachedToWindow(holder);
         holder.itemView.setEnabled(isAllItemsEnabled());
+    }
+
+    public void showUpdateButton(){
+        int a = 0;
+        for(int i =0 ; i< mList.size(); i++){
+            if(mList.get(i).isCheck())
+                a++;
+        }
+        if(a>0)
+            fragment.showControls(true);
+        else
+            fragment.showControls(false);
     }
 
     public boolean isAllItemsEnabled(){ return mAllEnabled; }

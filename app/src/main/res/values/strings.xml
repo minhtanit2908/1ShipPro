@@ -5,6 +5,10 @@
     <string name="action_settings">Settings</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!--TODO: Title toolbar-->
+    <string name="title_donhang">ĐƠN HÀNG CỦA TÔI</string>
+    <string name="title_updatedonhang">CẬP NHẬT ĐƠN HÀNG</string>
+
     <!--TODO: Login-->
     <string name="inputNotComplete">Vui lòng nhập số điện thoại</string>
 
@@ -61,9 +65,34 @@
     <!--TODO:don hang moi fragment-->
     <string name="toggle_on">On</string>
     <string name="toggle_off">Off</string>
-    <string name="receive">Nhận</string>
-    <string name="dismiss">Bỏ Qua</string>
+    <string name="receive">NHẬN</string>
+    <string name="dismiss">BỎ QUA</string>
     <string name="select_all">Chọn tất cả</string>
-    <string name="undo">Quay Lại</string>
+    <string name="undo">HOÀN TÁC</string>
+    <string name="update_dh">CẬP NHẬT ĐƠN HÀNG</string>
+
+    <!--TODO: title view pager-->
+    <string name="donhang_tab1">Đơn hàng mới</string>
+    <string name="donhang_tab2">Chưa hoàn thành</string>
+    <string name="donhang_tab3">Đã hoàn thành</string>
+
+    <!--TODO: Update don hang-->
+    <string name="work">CÔNG VIỆC</string>
+    <string name="image">HÌNH ẢNH</string>
+    <string name="note">GHI CHÚ</string>
+    <string name="finish">Hoàn thành</string>
+    <string name="unfinished">Chưa hoàn thành</string>
+    <string name="add_image">THÊM HÌNH</string>
+    <string name="change">THAY ĐỔI</string>
+    <string name="done">XONG</string>
+    <string name="reason_mutiltext">Lý do...</string>
+    <string name="btnOk">Ok</string>
+    <string name="btnCancle">Hủy</string>
+    <string name="message_remove_image">Bạn muốn xóa hình này chứ?</string>
+
+    <!--TODO: Orders Detial Activity-->
+    <string name="orderdetail_tab1">Thông tin giao nhận</string>
+    <string name="orderdetail_tab2">Thông tin hàng hóa/dịch vụ</string>
+    <string name="orderdetail_tab3">Tổng chi phí</string>
 
 </resources>
