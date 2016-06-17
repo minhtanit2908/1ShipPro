@@ -1,18 +1,69 @@
 <resources>
     <string name="app_name">1ShipPro</string>
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
     <string name="action_settings">Settings</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--TODO: Login-->
+    <string name="inputNotComplete">Vui lòng nhập số điện thoại</string>
+
+    <!--TODO: Register-->
+    <string name="register">Đăng kí tham gia</string>
+    <string name="name">Họ tên</string>
+    <string name="phone">Số điện thoại</string>
+    <string name="invite_code">Mã giới thiệu(nếu có)</string>
+
+    <!--TODO: Add information-->
+    <string name="add_information">Bổ sung thông tin</string>
+    <string name="add_information_note">Để xác nhận tài khoản đăng kí lái xe là hợp  pháp, xin vui lòng cung cấp những hình ảnh sau để chứng thực tài khoản</string>
+    <string name="vehicles">Loại phương tiện</string>
+    <string name="license_plates">Biển số xe</string>
+    <string name="vehicle_photos">Ảnh xe</string>
+    <string name="vehicle_photos_note">(Chụp ảnh xe rõ biển số)</string>
+    <string name="your_photos">Ảnh của bạn</string>
+    <string name="your_photos_note">(Hình ảnh rõ ràng, chụp thẳng mặt)</string>
+    <string name="license">Bằng lái</string>
+    <string name="license_note">(Chụp rõ tên &amp; số bằng)</string>
+    <string name="identity_card">Chứng minh thư</string>
+    <string name="identity_card_note">(Chụp rõ tên &amp; dấu vân tay)</string>
+
+    <!--TODO: Enter confirm code-->
+    <string name="confirm">Xác nhận</string>
+    <string name="confirm_note">Mã xác nhận đã được gửi qua tin nhắn của bạn, điền mã số để tiếp tục</string>
+    <string name="confirm_code">Mã xác nhận</string>
+    <string name="activated">Kích hoạt</string>
+    <string name="mess_not_received">Chưa nhận được tin nhắn</string>
+
+    <!--TODO: Button-->
+    <string name="btLogin">Đăng nhập</string>
+    <string name="btRegister">Đăng ký tham gia</string>
+    <string name="btNext">Tiếp tục</string>
+    <string name="btFinish">Xong</string>
+    <string name="btFaceBook">Đăng ký qua Facebook</string>
+    <string name="btGoogle">Đăng ký qua Google</string>
+
+    <!--TODO: Datetime-->
+    <string name="ago">trước</string>
+    <string name="day">ngày</string>
+    <string name="days">ngày</string>
+    <string name="month">tháng</string>
+    <string name="months">tháng</string>
+    <string name="year">năm</string>
+    <string name="years">năm</string>
+    <string name="hour">giờ</string>
+    <string name="hours">giờ</string>
+    <string name="minute">phút</string>
+    <string name="minutes">phút</string>
+    <string name="second">giây</string>
+    <string name="seconds">giây</string>
+
+    <!--TODO:don hang moi fragment-->
     <string name="toggle_on">On</string>
     <string name="toggle_off">Off</string>
-    <!--don hang moi fragment-->
     <string name="receive">Nhận</string>
     <string name="dismiss">Bỏ Qua</string>
     <string name="select_all">Chọn tất cả</string>
     <string name="undo">Quay Lại</string>
+
 </resources>
