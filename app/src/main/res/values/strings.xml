@@ -4,6 +4,9 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Settings</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="facebook_app_id">256868198008958</string>
+    <string name="debug_key">btNVic1ZnMOITQ4BNLcCBEhKfwU=</string>
+    <string name="sha1">10:AA:E6:F3:9E:BC:F7:6A:9F:12:05:A5:3A:7B:B8:31:50:D8:29:C9</string>
 
     <!--TODO: Title toolbar-->
     <string name="title_donhang">ĐƠN HÀNG CỦA TÔI</string>

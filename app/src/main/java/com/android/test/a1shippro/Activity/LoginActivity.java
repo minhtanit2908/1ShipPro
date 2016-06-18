@@ -1,11 +1,15 @@
 package com.android.test.a1shippro.Activity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v7.app.AppCompatActivity;
+import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.widget.FrameLayout;
 
 import com.android.test.a1shippro.Fragment.AddInformationFragment;
@@ -13,6 +17,8 @@ import com.android.test.a1shippro.Fragment.Empty_Fragment;
 import com.android.test.a1shippro.Fragment.LoginFragment;
 import com.android.test.a1shippro.Fragment.RegisterFragment;
 import com.android.test.a1shippro.R;
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,9 +31,15 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Initialize the facebook SDK
+        FacebookSdk.sdkInitialize(LoginActivity.this);
+        AppEventsLogger.activateApp(LoginActivity.this);
         setContentView(R.layout.activity_login);
         flContainer = (FrameLayout) findViewById(R.id.container);
-
+        TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+        String android_id = Settings.Secure.getString(getContentResolver(),
+                Settings.Secure.ANDROID_ID);
+        Log.d("loi", "ANdroid ID: " + android_id);
         setupAdapter();
     }
 

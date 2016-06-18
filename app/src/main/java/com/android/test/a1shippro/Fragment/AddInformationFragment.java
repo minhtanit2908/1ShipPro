@@ -1,6 +1,7 @@
 package com.android.test.a1shippro.Fragment;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -148,46 +149,48 @@ public class AddInformationFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        Log.d("loi", "requestCode: " + requestCode + "-resultCode: " + resultCode + data.getDataString());
-        if (requestCode == 11 && resultCode == getActivity().RESULT_OK)
-            setImageViewSRC(data, img11);
+        if (resultCode != Activity.RESULT_CANCELED) {
+
+            Log.d("loi", "requestCode: " + requestCode + "-resultCode: " + resultCode + data.getDataString());
+            if(resultCode == getActivity().RESULT_OK) {
+                if (requestCode == 11)
+                    setImageViewSRC(data, img11);
+                else if (requestCode == 12)
+                    setImageViewSRC(data, img12);
+                else if (requestCode == 21)
+                    setImageViewSRC(data, img21);
+                else if (requestCode == 22)
+                    setImageViewSRC(data, img22);
+                else if (requestCode == 31)
+                    setImageViewSRC(data, img31);
+                else if (requestCode == 32 )
+                    setImageViewSRC(data, img32);
+                else if (requestCode == 41 )
+                    setImageViewSRC(data, img41);
+                else if (requestCode == 42 )
+                    setImageViewSRC(data, img42);
+            }
+        }
         else
-        if (requestCode == 12 && resultCode == getActivity().RESULT_OK)
-            setImageViewSRC(data, img12);
-        else
-        if (requestCode == 21 && resultCode == getActivity().RESULT_OK)
-            setImageViewSRC(data, img21);
-        else
-        if (requestCode == 22 && resultCode == getActivity().RESULT_OK)
-            setImageViewSRC(data, img22);
-        else
-        if (requestCode == 31 && resultCode == getActivity().RESULT_OK)
-            setImageViewSRC(data, img31);
-        else
-        if (requestCode == 32 && resultCode == getActivity().RESULT_OK)
-            setImageViewSRC(data, img32);
-        else
-        if (requestCode == 41 && resultCode == getActivity().RESULT_OK)
-            setImageViewSRC(data, img41);
-        else
-        if (requestCode == 42 && resultCode == getActivity().RESULT_OK)
-            setImageViewSRC(data, img42);
+            super.onActivityResult(requestCode, resultCode, data);
     }
 
     public void setImageViewSRC(Intent data, ImageView img)
     {
-        if(data.getExtras()!=null)
-    {
-        Bundle extras = data.getExtras();
-        Bitmap imageBitmap = (Bitmap) extras.get("data");
-        img.setImageBitmap(imageBitmap);
-        img.setScaleType(ImageView.ScaleType.CENTER_CROP);
-    }
-else {
-            Uri uri = data.getData();
-            img.setImageURI(uri);
+        try {
+            if(data.getExtras()!=null)
+        {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            img.setImageBitmap(imageBitmap);
             img.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        }
+            else {
+                Uri uri = data.getData();
+                img.setImageURI(uri);
+                img.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            }
+        } catch (Exception e) {
         }
     }
 
